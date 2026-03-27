@@ -1,9 +1,8 @@
 package GiorgiaFormicola;
 
-import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.entities.Magazine;
-import GiorgiaFormicola.enums.PeriodicityType;
-import GiorgiaFormicola.exceptions.InvalidISBNCodeException;
+import GiorgiaFormicola.entities.User;
+import GiorgiaFormicola.exceptions.InvalidCardNumberException;
+import GiorgiaFormicola.exceptions.InvalidDateException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -51,7 +50,7 @@ public class Application {
         }*/
 
         //TESTS Magazine CLASS
-        try {
+       /* try {
             LibraryElement magazine1 = new Magazine("3338814442221", "magazine1", 2012, 100, PeriodicityType.BIANNUAL);
             System.out.println(magazine1);
         } catch (InvalidISBNCodeException e) {
@@ -62,6 +61,29 @@ public class Application {
             LibraryElement magazine2 = new Magazine("ciao", "magazine1", 2012, 100, PeriodicityType.WEEKLY);
             System.out.println(magazine2);
         } catch (InvalidISBNCodeException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+
+        //TESTS User CONSTRUCTOR
+        try {
+            User user1 = new User("Mario", "Rossi", 1980, 12, 3, "33333");
+            System.out.println(user1);
+        } catch (InvalidCardNumberException | InvalidDateException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            User user2 = new User("Mario", "Verdi", 1980, 5, 3, "ciao");
+            System.out.println(user2);
+        } catch (InvalidCardNumberException | InvalidDateException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            User user3 = new User("Mario", "Bianchi", 1980, 15, 3, "444");
+            System.out.println(user3);
+        } catch (InvalidCardNumberException | InvalidDateException e) {
             System.out.println(e.getMessage());
         }
 
