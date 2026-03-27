@@ -3,6 +3,7 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="library_catalog_pu">
+        <class>GiorgiaFormicola.entities.LibraryElement</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/library_catalog"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
