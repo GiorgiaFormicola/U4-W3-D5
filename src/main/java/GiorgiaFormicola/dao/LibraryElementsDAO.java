@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class LibraryElementsDAO {
@@ -31,7 +32,7 @@ public class LibraryElementsDAO {
 
     public LibraryElement findById(String id) {
         LibraryElement found = em.find(LibraryElement.class, UUID.fromString(id));
-        if (found == null) throw new NotFoundException(id, "Library element");
+        if (found == null) throw new NotFoundException(id, "Item");
         return found;
     }
 
@@ -63,6 +64,14 @@ public class LibraryElementsDAO {
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<LibraryElement> findByRealeaseYear(int year) {
+        TypedQuery<LibraryElement> query = em.createQuery("SELECT e FROM LibraryElement e WHERE e.releaseYear = :year", LibraryElement.class);
+        query.setParameter("year", year);
+        List<LibraryElement> found = query.getResultList();
+        if (found.isEmpty()) throw new NotFoundException(year);
+        else return found;
     }
 
     ;

@@ -1,9 +1,7 @@
 package GiorgiaFormicola;
 
 import GiorgiaFormicola.dao.LibraryElementsDAO;
-import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.entities.Magazine;
-import GiorgiaFormicola.enums.PeriodicityType;
+import GiorgiaFormicola.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -177,12 +175,27 @@ public class Application {
         }*/
 
         //TESTS deleteByISBN METHOD
-        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        /*LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
         LibraryElement magazineForTest = new Magazine("3338814442225", "magazine1", 2020, 12, PeriodicityType.MONTHLY);
         libraryElementsDAO.save(magazineForTest);
         libraryElementsDAO.deleteByISBN("3338814442225");
         //Try to catch error
-        libraryElementsDAO.deleteByISBN("3338814442227");
+        libraryElementsDAO.deleteByISBN("3338814442227");*/
+
+        //TESTS findByRealeaseYear METHOD
+        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        try {
+            libraryElementsDAO.findByRealeaseYear(2012).forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Try to catch error
+        try {
+            libraryElementsDAO.findByRealeaseYear(2020).forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
 
         System.out.println("Hello World!");

@@ -7,6 +7,10 @@ public class NotFoundException extends RuntimeException {
     }
 
     public NotFoundException(String codeISBN) {
-        super("Element with ISBN code " + codeISBN + " not found in the catalog.");
+        super("Item with ISBN code " + codeISBN + " not found in the catalog.");
+    }
+
+    public NotFoundException(int year) {
+        super("No items published in " + year + " found in the catalog.");
     }
 }
