@@ -1,8 +1,8 @@
 package GiorgiaFormicola;
 
-import GiorgiaFormicola.entities.Book;
 import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.enums.GenreType;
+import GiorgiaFormicola.entities.Magazine;
+import GiorgiaFormicola.enums.PeriodicityType;
 import GiorgiaFormicola.exceptions.InvalidISBNCodeException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -36,7 +36,7 @@ public class Application {
         }*/
 
         //TESTS Book CLASS
-        try {
+      /*  try {
             LibraryElement book1 = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
             System.out.println(book1);
         } catch (InvalidISBNCodeException e) {
@@ -46,6 +46,21 @@ public class Application {
         try {
             LibraryElement book2 = new Book("ciao", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
             System.out.println(book2);
+        } catch (InvalidISBNCodeException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS Magazine CLASS
+        try {
+            LibraryElement magazine1 = new Magazine("3338814442221", "magazine1", 2012, 100, PeriodicityType.BIANNUAL);
+            System.out.println(magazine1);
+        } catch (InvalidISBNCodeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            LibraryElement magazine2 = new Magazine("ciao", "magazine1", 2012, 100, PeriodicityType.WEEKLY);
+            System.out.println(magazine2);
         } catch (InvalidISBNCodeException e) {
             System.out.println(e.getMessage());
         }
