@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 @Table(name = "library_elements")
-public class LibraryElement {
+public abstract class LibraryElement {
     //ATTRIBUTES
     @Id
     @GeneratedValue
@@ -68,14 +70,13 @@ public class LibraryElement {
         return numberOfPages;
     }
 
+    //TO STRING
     @Override
     public String toString() {
-        return "LibraryElement{" +
-                "id=" + id +
+        return "id=" + id +
                 ", codeISBN='" + codeISBN + '\'' +
                 ", title='" + title + '\'' +
                 ", releaseYear=" + releaseYear +
-                ", numberOfPages=" + numberOfPages +
-                '}';
+                ", numberOfPages=" + numberOfPages;
     }
 }

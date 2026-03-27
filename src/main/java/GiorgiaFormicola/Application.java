@@ -1,6 +1,8 @@
 package GiorgiaFormicola;
 
+import GiorgiaFormicola.entities.Book;
 import GiorgiaFormicola.entities.LibraryElement;
+import GiorgiaFormicola.enums.GenreType;
 import GiorgiaFormicola.exceptions.InvalidISBNCodeException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -14,8 +16,8 @@ public class Application {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        //TESTS LibraryElement CONSTRUCTOR
-        try {
+        //TESTS LibraryElement CONSTRUCTOR (NOT ABSTRACT CLASS)
+       /* try {
             LibraryElement libraryElement1 = new LibraryElement("3338814442221", "elemento1", 2012, 100);
         } catch (InvalidISBNCodeException e) {
             System.out.println(e.getMessage());
@@ -29,6 +31,21 @@ public class Application {
 
         try {
             LibraryElement libraryElement3 = new LibraryElement("ciao", "elemento3", 2012, 100);
+        } catch (InvalidISBNCodeException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS Book CLASS
+        try {
+            LibraryElement book1 = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
+            System.out.println(book1);
+        } catch (InvalidISBNCodeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            LibraryElement book2 = new Book("ciao", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
+            System.out.println(book2);
         } catch (InvalidISBNCodeException e) {
             System.out.println(e.getMessage());
         }
