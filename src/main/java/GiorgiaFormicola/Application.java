@@ -1,11 +1,16 @@
 package GiorgiaFormicola;
 
+import GiorgiaFormicola.entities.Book;
+import GiorgiaFormicola.entities.LibraryElement;
+import GiorgiaFormicola.entities.Loan;
 import GiorgiaFormicola.entities.User;
-import GiorgiaFormicola.exceptions.InvalidCardNumberException;
-import GiorgiaFormicola.exceptions.InvalidDateException;
+import GiorgiaFormicola.enums.GenreType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
 
 public class Application {
 
@@ -66,7 +71,7 @@ public class Application {
 
 
         //TESTS User CONSTRUCTOR
-        try {
+       /* try {
             User user1 = new User("Mario", "Rossi", 1980, 12, 3, "33333");
             System.out.println(user1);
         } catch (InvalidCardNumberException | InvalidDateException e) {
@@ -84,6 +89,26 @@ public class Application {
             User user3 = new User("Mario", "Bianchi", 1980, 15, 3, "444");
             System.out.println(user3);
         } catch (InvalidCardNumberException | InvalidDateException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS Loan CONSTRUCTOR
+        User user = new User("Mario", "Rossi", 1980, 12, 3, "33333");
+        LibraryElement book = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
+        Loan loan = new Loan(user, book);
+        System.out.println(loan);
+
+        try {
+            loan.setReturnDate(LocalDate.of(2026, 10, 5));
+            System.out.println(loan.getReturnDate());
+        } catch (DateTimeException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            loan.setReturnDate(LocalDate.of(2026, 15, 5));
+            System.out.println(loan.getReturnDate());
+        } catch (DateTimeException e) {
             System.out.println(e.getMessage());
         }
 

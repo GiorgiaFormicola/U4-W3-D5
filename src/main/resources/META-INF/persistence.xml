@@ -7,6 +7,7 @@
         <class>GiorgiaFormicola.entities.Book</class>
         <class>GiorgiaFormicola.entities.Magazine</class>
         <class>GiorgiaFormicola.entities.User</class>
+        <class>GiorgiaFormicola.entities.Loan</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/library_catalog"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
