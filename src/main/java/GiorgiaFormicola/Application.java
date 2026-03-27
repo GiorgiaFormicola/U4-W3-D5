@@ -2,7 +2,8 @@ package GiorgiaFormicola;
 
 import GiorgiaFormicola.dao.LibraryElementsDAO;
 import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.exceptions.NotFoundException;
+import GiorgiaFormicola.entities.Magazine;
+import GiorgiaFormicola.enums.PeriodicityType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -159,7 +160,7 @@ public class Application {
         }*/
 
         //TESTS findByISBN METHOD
-        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        /*LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
         try {
             LibraryElement elementFromDB = libraryElementsDAO.findByISBN("3338814442221");
             System.out.println(elementFromDB);
@@ -173,7 +174,15 @@ public class Application {
             System.out.println(elementFromDB);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
+
+        //TESTS deleteByISBN METHOD
+        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        LibraryElement magazineForTest = new Magazine("3338814442225", "magazine1", 2020, 12, PeriodicityType.MONTHLY);
+        libraryElementsDAO.save(magazineForTest);
+        libraryElementsDAO.deleteByISBN("3338814442225");
+        //Try to catch error
+        libraryElementsDAO.deleteByISBN("3338814442227");
 
 
         System.out.println("Hello World!");

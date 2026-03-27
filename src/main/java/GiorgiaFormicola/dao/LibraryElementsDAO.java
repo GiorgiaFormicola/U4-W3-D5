@@ -52,10 +52,20 @@ public class LibraryElementsDAO {
         else return found;
     }
 
+    public void deleteByISBN(String codeISBN) {
+        try {
+            LibraryElement found = this.findByISBN(codeISBN);
+            EntityTransaction transaction = this.em.getTransaction();
+            transaction.begin();
+            em.remove(found);
+            transaction.commit();
+            System.out.println("The " + found.getClass().getSimpleName().toLowerCase() + " with ISBN code " + codeISBN + " has been deleted successfully!");
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     ;
 
-    public void deleteByISBN(String codeISBN) {
-
-    }
 
 }
