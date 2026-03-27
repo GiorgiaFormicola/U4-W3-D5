@@ -6,6 +6,7 @@ import GiorgiaFormicola.exceptions.ElementAlreadyInCatalogException;
 import GiorgiaFormicola.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 import java.util.UUID;
 
@@ -41,6 +42,20 @@ public class LibraryElementsDAO {
         em.remove(found);
         transaction.commit();
         System.out.println("The " + found.getClass().getSimpleName().toLowerCase() + " has been deleted successfully!");
+    }
+
+    public LibraryElement findByISBN(String codeISBN) {
+        TypedQuery<LibraryElement> query = em.createQuery("SELECT e FROM LibraryElement e WHERE e.codeISBN = :codeISBN", LibraryElement.class);
+        query.setParameter("codeISBN", codeISBN);
+        LibraryElement found = query.getSingleResultOrNull();
+        if (found == null) throw new NotFoundException(codeISBN);
+        else return found;
+    }
+
+    ;
+
+    public void deleteByISBN(String codeISBN) {
+
     }
 
 }

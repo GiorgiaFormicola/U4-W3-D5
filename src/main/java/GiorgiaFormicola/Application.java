@@ -1,11 +1,7 @@
 package GiorgiaFormicola;
 
 import GiorgiaFormicola.dao.LibraryElementsDAO;
-import GiorgiaFormicola.dao.LoansDAO;
-import GiorgiaFormicola.dao.UsersDAO;
 import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.entities.Loan;
-import GiorgiaFormicola.entities.User;
 import GiorgiaFormicola.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -150,7 +146,7 @@ public class Application {
         }*/
 
         //TESTS LoanDAO
-        UsersDAO usersDAO = new UsersDAO(entityManager);
+      /*  UsersDAO usersDAO = new UsersDAO(entityManager);
         LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
         LoansDAO loansDAO = new LoansDAO(entityManager);
         try {
@@ -158,6 +154,23 @@ public class Application {
             LibraryElement libraryElementFromDB = libraryElementsDAO.findById("437e9c10-3089-4124-a045-cf8281ddc55f");
             Loan loan = new Loan(userFromDB, libraryElementFromDB);
             loansDAO.save(loan);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS findByISBN METHOD
+        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        try {
+            LibraryElement elementFromDB = libraryElementsDAO.findByISBN("3338814442221");
+            System.out.println(elementFromDB);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Try to catch error
+        try {
+            LibraryElement elementFromDB = libraryElementsDAO.findByISBN("333881221");
+            System.out.println(elementFromDB);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
