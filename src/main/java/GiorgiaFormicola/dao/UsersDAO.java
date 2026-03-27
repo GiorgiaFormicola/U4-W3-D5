@@ -21,7 +21,7 @@ public class UsersDAO {
             transaction.begin();
             em.persist(user);
             transaction.commit();
-            System.out.println(user.getName() + " " + user.getSurname() + " successfully added to the database.");
+            System.out.println("User " + user.getName() + " " + user.getSurname() + " successfully added to the database.");
         } catch (Exception e) { //Probabilmente non del tutto corretto come metodo ma intanto ci provo
             throw new UserAlreadyInDBException(user.getCardNumber());
         }
@@ -31,5 +31,14 @@ public class UsersDAO {
         User found = em.find(User.class, UUID.fromString(id));
         if (found == null) throw new NotFoundException(id, "User");
         return found;
+    }
+
+    public void deleteById(String id) {
+        User found = this.findById(id);
+        EntityTransaction transaction = this.em.getTransaction();
+        transaction.begin();
+        em.remove(found);
+        transaction.commit();
+        System.out.println("The user " + found.getName() + " " + found.getSurname() + " has been deleted successfully from database.");
     }
 }

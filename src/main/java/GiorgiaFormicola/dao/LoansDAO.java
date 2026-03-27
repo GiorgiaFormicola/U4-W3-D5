@@ -27,4 +27,13 @@ public class LoansDAO {
         if (found == null) throw new NotFoundException(id, "Loan");
         return found;
     }
+
+    public void deleteById(String id) {
+        Loan found = this.findById(id);
+        EntityTransaction transaction = this.em.getTransaction();
+        transaction.begin();
+        em.remove(found);
+        transaction.commit();
+        System.out.println("The loan to " + found.getUser().getName() + " " + found.getUser().getSurname() + " has been deleted successfully from database.");
+    }
 }

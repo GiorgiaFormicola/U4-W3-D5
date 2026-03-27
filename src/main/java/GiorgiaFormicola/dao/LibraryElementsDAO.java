@@ -33,4 +33,14 @@ public class LibraryElementsDAO {
         if (found == null) throw new NotFoundException(id, "Library element");
         return found;
     }
+
+    public void deleteById(String id) {
+        LibraryElement found = this.findById(id);
+        EntityTransaction transaction = this.em.getTransaction();
+        transaction.begin();
+        em.remove(found);
+        transaction.commit();
+        System.out.println("The " + found.getClass().getSimpleName().toLowerCase() + " has been deleted successfully!");
+    }
+
 }
