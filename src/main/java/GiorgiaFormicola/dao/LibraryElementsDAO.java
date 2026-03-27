@@ -91,7 +91,11 @@ public class LibraryElementsDAO {
         else return found;
     }
 
-    ;
+    /*public List<LibraryElement> findOnLoanByUserCard(long cardNumber) {
+        TypedQuery<LibraryElement> query = em.createQuery("SELECT e FROM LibraryElement e JOIN Loan  e WHERE e.title ILIKE :title", LibraryElement.class);
+        query.setParameter("title", "%" + title + "%");
+        List<LibraryElement> found = query.getResultList();
+    }*/
 
 
 }
