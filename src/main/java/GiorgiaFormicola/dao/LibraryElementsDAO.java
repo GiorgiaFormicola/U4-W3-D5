@@ -83,6 +83,14 @@ public class LibraryElementsDAO {
         else return found;
     }
 
+    public List<LibraryElement> findByTitle(String title) {
+        TypedQuery<LibraryElement> query = em.createQuery("SELECT e FROM LibraryElement e WHERE e.title ILIKE :title", LibraryElement.class);
+        query.setParameter("title", "%" + title + "%");
+        List<LibraryElement> found = query.getResultList();
+        if (found.isEmpty()) throw new NotFoundException(title, false);
+        else return found;
+    }
+
     ;
 
 

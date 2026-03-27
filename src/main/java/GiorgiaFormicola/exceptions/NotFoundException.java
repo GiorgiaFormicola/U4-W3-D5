@@ -14,7 +14,8 @@ public class NotFoundException extends RuntimeException {
         super("No items published in " + year + " found in the catalog.");
     }
 
-    public NotFoundException(String author, boolean aBoolean) {
-        super("No books written by " + author.toUpperCase() + " found in the catalog.");
+    public NotFoundException(String string, boolean aBoolean) {
+        super(aBoolean ? "No books written by " + string.toUpperCase() + " found in the catalog." : "No items with title including '" + string + "' found in the catalog.");
     }
+
 }

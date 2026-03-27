@@ -198,7 +198,7 @@ public class Application {
         }*/
 
         //TESTS findByAuthor METHOD
-        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+       /* LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
         try {
             libraryElementsDAO.findByAuthor("Dan Brown").forEach(System.out::println);
         } catch (NotFoundException e) {
@@ -216,8 +216,29 @@ public class Application {
             libraryElementsDAO.findByAuthor("Tolkien").forEach(System.out::println);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
+        }*/
+
+        //TESTS findByTitle METHOD
+        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        try {
+            libraryElementsDAO.findByTitle("book1").forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
         }
 
+
+        try {
+            libraryElementsDAO.findByTitle("1").forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Try to catch error
+        try {
+            libraryElementsDAO.findByTitle("2").forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println("Hello World!");
         entityManager.close();
