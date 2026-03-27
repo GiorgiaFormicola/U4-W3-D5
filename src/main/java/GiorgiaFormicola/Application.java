@@ -1,5 +1,13 @@
 package GiorgiaFormicola;
 
+import GiorgiaFormicola.dao.LibraryElementsDAO;
+import GiorgiaFormicola.entities.Book;
+import GiorgiaFormicola.entities.LibraryElement;
+import GiorgiaFormicola.entities.Magazine;
+import GiorgiaFormicola.enums.GenreType;
+import GiorgiaFormicola.enums.PeriodicityType;
+import GiorgiaFormicola.exceptions.ElementAlreadyInCatalogException;
+import GiorgiaFormicola.exceptions.InvalidISBNCodeException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -103,6 +111,19 @@ public class Application {
         } catch (DateTimeException e) {
             System.out.println(e.getMessage());
         }*/
+
+        //TESTS LibraryElementDAO
+        LibraryElementsDAO elementsDAO = new LibraryElementsDAO(entityManager);
+        try {
+            LibraryElement book1 = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
+            LibraryElement magazine1 = new Magazine("3338814442223", "magazine1", 2012, 100, PeriodicityType.BIANNUAL);
+            elementsDAO.save(book1);
+            elementsDAO.save(magazine1);
+            //Try to catch error
+            elementsDAO.save(book1);
+        } catch (InvalidISBNCodeException | ElementAlreadyInCatalogException e) {
+            System.out.println(e.getMessage());
+        }
 
 
         System.out.println("Hello World!");
