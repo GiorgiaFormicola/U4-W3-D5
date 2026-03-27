@@ -1,7 +1,7 @@
 package GiorgiaFormicola;
 
-import GiorgiaFormicola.dao.LibraryElementsDAO;
-import GiorgiaFormicola.exceptions.NotFoundException;
+import GiorgiaFormicola.dao.LoansDAO;
+import GiorgiaFormicola.exceptions.AllLoansReturnedException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -219,7 +219,7 @@ public class Application {
         }*/
 
         //TESTS findByTitle METHOD
-        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        /*LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
         try {
             libraryElementsDAO.findByTitle("book1").forEach(System.out::println);
         } catch (NotFoundException e) {
@@ -238,10 +238,21 @@ public class Application {
             libraryElementsDAO.findByTitle("2").forEach(System.out::println);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
+        }*/
+
+        //TESTS getNotReturnedLoans METHOD
+        LoansDAO loansDAO = new LoansDAO(entityManager);
+        try {
+            loansDAO.getNotReturnedLoans().forEach(System.out::println);
+        } catch (AllLoansReturnedException e) {
+            System.out.println(e.getMessage());
         }
 
+        
         System.out.println("Hello World!");
         entityManager.close();
         entityManagerFactory.close();
+
+
     }
 }
