@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("BOOK")
+@Table(name = "books")
 public class Book extends LibraryElement {
     //ATTTRIBUTES
     @Column(nullable = false, length = 50)

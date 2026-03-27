@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "library_elements")
 public abstract class LibraryElement {
     //ATTRIBUTES

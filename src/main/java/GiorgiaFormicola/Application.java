@@ -1,16 +1,8 @@
 package GiorgiaFormicola;
 
-import GiorgiaFormicola.entities.Book;
-import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.entities.Loan;
-import GiorgiaFormicola.entities.User;
-import GiorgiaFormicola.enums.GenreType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
 
 public class Application {
 
@@ -93,7 +85,7 @@ public class Application {
         }*/
 
         //TESTS Loan CONSTRUCTOR
-        User user = new User("Mario", "Rossi", 1980, 12, 3, "33333");
+        /*User user = new User("Mario", "Rossi", 1980, 12, 3, "33333");
         LibraryElement book = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
         Loan loan = new Loan(user, book);
         System.out.println(loan);
@@ -104,15 +96,17 @@ public class Application {
         } catch (DateTimeException e) {
             System.out.println(e.getMessage());
         }
-        
+
         try {
             loan.setReturnDate(LocalDate.of(2026, 15, 5));
             System.out.println(loan.getReturnDate());
         } catch (DateTimeException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
 
         System.out.println("Hello World!");
+        entityManager.close();
+        entityManagerFactory.close();
     }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("MAGAZINE")
+@Table(name = "magazines")
 public class Magazine extends LibraryElement {
     //ATTRIBUTES
     @Enumerated(EnumType.STRING)
