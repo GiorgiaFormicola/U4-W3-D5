@@ -9,5 +9,6 @@ Poi ho cambiato direzione in quanto non apprezzavo il fatto di non poter utilizz
 per esempio non mi piaceva l'idea di poter creare un libro senza autore, per quanto mi rendo conto nella realtà
 potrebbero esistere libri con autore anonimo.
 Soprattutto ho immaginato la scalabilità di questa applicazione e pensando a possibili ulteriori entità da aggiungere
-come elementi della libreria (es. DVD, CD, ecc.) ho ritenuto fosse meglio avere delle tabelle separate.
+come elementi della libreria (es. DVD, CD, ecc.) ho ritenuto fosse meglio tenere aperta la possibilità dei vincoli NOT
+NULL.
 Per quanto riguarda le relazioni ho scelto due 1:N per i prestiti.
