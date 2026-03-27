@@ -1,7 +1,6 @@
 package GiorgiaFormicola;
 
 import GiorgiaFormicola.dao.LoansDAO;
-import GiorgiaFormicola.exceptions.AllLoansReturnedException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -241,18 +240,21 @@ public class Application {
         }*/
 
         //TESTS getNotReturnedLoans METHOD
-        LoansDAO loansDAO = new LoansDAO(entityManager);
+       /* LoansDAO loansDAO = new LoansDAO(entityManager);
         try {
             loansDAO.getNotReturnedLoans().forEach(System.out::println);
         } catch (AllLoansReturnedException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
-        
+        //TEST findOnLoanElementsNotReturned METHOD
+        LoansDAO loansDAO = new LoansDAO(entityManager);
+        loansDAO.findOnLoanElementsNotReturned(33333).forEach(System.out::println);
+
+
         System.out.println("Hello World!");
         entityManager.close();
         entityManagerFactory.close();
-
 
     }
 }

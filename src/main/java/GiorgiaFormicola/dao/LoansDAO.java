@@ -1,5 +1,6 @@
 package GiorgiaFormicola.dao;
 
+import GiorgiaFormicola.entities.LibraryElement;
 import GiorgiaFormicola.entities.Loan;
 import GiorgiaFormicola.exceptions.AllLoansReturnedException;
 import GiorgiaFormicola.exceptions.NotFoundException;
@@ -46,4 +47,12 @@ public class LoansDAO {
         if (found.isEmpty()) throw new AllLoansReturnedException();
         return found;
     }
+
+    public List<LibraryElement> findOnLoanElementsNotReturned(long cardNumber) {
+        TypedQuery<LibraryElement> query = em.createQuery("SELECT l.loanedElement FROM Loan l WHERE l.user.cardNumber  = :cardNumber AND l.returnDate IS NULL", LibraryElement.class);
+        query.setParameter("cardNumber", cardNumber);
+        return query.getResultList();
+    }
+
+
 }
