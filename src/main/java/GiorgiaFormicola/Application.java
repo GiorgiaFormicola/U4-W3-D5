@@ -1,13 +1,12 @@
 package GiorgiaFormicola;
 
 import GiorgiaFormicola.dao.LibraryElementsDAO;
-import GiorgiaFormicola.entities.Book;
+import GiorgiaFormicola.dao.LoansDAO;
+import GiorgiaFormicola.dao.UsersDAO;
 import GiorgiaFormicola.entities.LibraryElement;
-import GiorgiaFormicola.entities.Magazine;
-import GiorgiaFormicola.enums.GenreType;
-import GiorgiaFormicola.enums.PeriodicityType;
-import GiorgiaFormicola.exceptions.ElementAlreadyInCatalogException;
-import GiorgiaFormicola.exceptions.InvalidISBNCodeException;
+import GiorgiaFormicola.entities.Loan;
+import GiorgiaFormicola.entities.User;
+import GiorgiaFormicola.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -113,15 +112,53 @@ public class Application {
         }*/
 
         //TESTS LibraryElementDAO
-        LibraryElementsDAO elementsDAO = new LibraryElementsDAO(entityManager);
+        /*LibraryElementsDAO elementsDAO = new LibraryElementsDAO(entityManager);
         try {
             LibraryElement book1 = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
             LibraryElement magazine1 = new Magazine("3338814442223", "magazine1", 2012, 100, PeriodicityType.BIANNUAL);
             elementsDAO.save(book1);
             elementsDAO.save(magazine1);
-            //Try to catch error
+        } catch (InvalidISBNCodeException | ElementAlreadyInCatalogException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Try to catch error
+        try {
+            LibraryElement book1 = new Book("3338814442221", "book1", 2012, 100, "Dan Brown", GenreType.THRILLER);
             elementsDAO.save(book1);
         } catch (InvalidISBNCodeException | ElementAlreadyInCatalogException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS UsersDAO
+       /* UsersDAO usersDAO = new UsersDAO(entityManager);
+        try {
+            User user1 = new User("Mario", "Rossi", 1980, 12, 3, "33333");
+            User user2 = new User("Giulia", "Bianchi", 2000, 10, 5, "55");
+            usersDAO.save(user1);
+            usersDAO.save(user2);
+        } catch (InvalidCardNumberException | InvalidDateException | UserAlreadyInDBException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Try to catch error
+        try {
+            User user1 = new User("Mario", "Rossi", 1980, 12, 3, "33333");
+            usersDAO.save(user1);
+        } catch (InvalidCardNumberException | InvalidDateException | UserAlreadyInDBException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS LoanDAO
+        UsersDAO usersDAO = new UsersDAO(entityManager);
+        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        LoansDAO loansDAO = new LoansDAO(entityManager);
+        try {
+            User userFromDB = usersDAO.findById("5d4bd202-2292-4508-b209-96a60aee095d");
+            LibraryElement libraryElementFromDB = libraryElementsDAO.findById("437e9c10-3089-4124-a045-cf8281ddc55f");
+            Loan loan = new Loan(userFromDB, libraryElementFromDB);
+            loansDAO.save(loan);
+        } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
 
