@@ -183,7 +183,7 @@ public class Application {
         libraryElementsDAO.deleteByISBN("3338814442227");*/
 
         //TESTS findByRealeaseYear METHOD
-        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+       /* LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
         try {
             libraryElementsDAO.findByRealeaseYear(2012).forEach(System.out::println);
         } catch (NotFoundException e) {
@@ -193,6 +193,27 @@ public class Application {
         //Try to catch error
         try {
             libraryElementsDAO.findByRealeaseYear(2020).forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        //TESTS findByAuthor METHOD
+        LibraryElementsDAO libraryElementsDAO = new LibraryElementsDAO(entityManager);
+        try {
+            libraryElementsDAO.findByAuthor("Dan Brown").forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            libraryElementsDAO.findByAuthor("dan brown").forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Try to catch error
+        try {
+            libraryElementsDAO.findByAuthor("Tolkien").forEach(System.out::println);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }

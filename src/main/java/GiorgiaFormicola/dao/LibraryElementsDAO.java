@@ -1,6 +1,7 @@
 package GiorgiaFormicola.dao;
 
 
+import GiorgiaFormicola.entities.Book;
 import GiorgiaFormicola.entities.LibraryElement;
 import GiorgiaFormicola.exceptions.ElementAlreadyInCatalogException;
 import GiorgiaFormicola.exceptions.NotFoundException;
@@ -71,6 +72,14 @@ public class LibraryElementsDAO {
         query.setParameter("year", year);
         List<LibraryElement> found = query.getResultList();
         if (found.isEmpty()) throw new NotFoundException(year);
+        else return found;
+    }
+
+    public List<Book> findByAuthor(String author) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author ILIKE :author", Book.class);
+        query.setParameter("author", author);
+        List<Book> found = query.getResultList();
+        if (found.isEmpty()) throw new NotFoundException(author, true);
         else return found;
     }
 
